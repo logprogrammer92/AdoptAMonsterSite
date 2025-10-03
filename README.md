@@ -7,4 +7,6 @@ This is a website that users can visit and setup a login which allows the user t
 ## Database Information
 - TODO
 
-
+## Team members
+- Eli Melnik
+- Logan Nelson
