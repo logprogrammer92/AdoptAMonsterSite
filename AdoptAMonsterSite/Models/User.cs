@@ -6,4 +6,6 @@ public class ApplicationUser : IdentityUser
 {
     //Custom Fields can go here in the future
     public required string DisplayName { get; set; }
+
+    public int AdoptedMonsterID { get; set;} = -1;
 }
