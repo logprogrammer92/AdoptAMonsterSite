@@ -8,7 +8,7 @@ public class Monster
     
     [Required]
     [Display (Name = "Monster Name")]
-    public string Name { get; set; }
+    public string? Name { get; set; }
 
     [Display (Name = "Species")]
     public string? Species { get; set; }
