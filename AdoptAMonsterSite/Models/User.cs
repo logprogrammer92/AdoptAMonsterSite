@@ -5,7 +5,7 @@ namespace AdoptAMonsterSite.Models;
 public class ApplicationUser : IdentityUser
 {
     //Custom Fields can go here in the future
-    public required string DisplayName { get; set; }
+    public required string DisplayName { get; set; } = string.Empty;
 
     public int AdoptedMonsterID { get; set;} = -1;
 }
