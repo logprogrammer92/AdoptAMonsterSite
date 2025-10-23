@@ -7,6 +7,7 @@ This is a website that users can visit and setup a login which allows the user t
 ## Database Information
 - TODO
 
-## Team members
-- ToastedToast00
-- Logan Nelson
+## Contributers
+- [Alex Fischer](https://github.com/SuperGamer001)
+- [ToastedToast00](https://github.com/ToastedToast00)
+- [Logan Nelson](https://github.com/logprogrammer92)
