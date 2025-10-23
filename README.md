@@ -25,9 +25,8 @@ There will also be various activities for the user to perform with their monster
 
 ### Setup Instructions
 1. Clone the repo
-2. Configure the database connection
-3. Apply migrations using package manager console
-4. Run the application
+2. Apply migrations using package manager console
+3. Run the application
 
 ## Contributers
 - [Alex Fischer](https://github.com/SuperGamer001)
