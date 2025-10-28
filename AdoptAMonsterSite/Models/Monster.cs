@@ -20,3 +20,13 @@ public class Monster
     [DataType (DataType.Currency)]
     public decimal? Price { get; set; }
 }
+
+public class MonsterListViewModel
+{
+    public required IEnumerable<Monster> Monsters { get; set; }
+    public int CurrentPage { get; set; }
+    public int TotalPages { get; set; }
+    public int PageSize { get; set; }
+    public int TotalItems { get; set; }
+    public string? SearchTerm { get; set; }
+}
