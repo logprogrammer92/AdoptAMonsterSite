@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdoptAMonsterSite.Models;
 
 public class Monster
 {
+    [Key]
     public int Id { get; set; }
     
     [Required]
@@ -15,10 +17,14 @@ public class Monster
 
     [Display(Name = "Description")]
     public string? Description { get; set; }
-    
-    [Display (Name = "AdoptionFee")]
-    [DataType (DataType.Currency)]
+
+    [Display(Name = "AdoptionFee")]
+    [DataType(DataType.Currency)]
     public decimal? Price { get; set; }
+
+    [ForeignKey("ApplicationUser")]
+    public string ApplicationUserID { get; set; } = string.Empty;
+    public ApplicationUser ApplicationUser { get; set; } = null;
 }
 
 public class MonsterListViewModel
