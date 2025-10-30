@@ -1,8 +1,48 @@
-﻿@{
+﻿@model IEnumerable<AdoptAMonsterSite.Models.Monster>
+
+@{
     ViewData["Title"] = "Home Page";
+
+    // Preprocess popular and recent monsters to avoid dynamic LINQ issues
+    var monsterList = Model ?? new List<AdoptAMonsterSite.Models.Monster>();
+    var popularMonsters = monsterList.Take(3).ToList();
+    var recentMonsters = monsterList.OrderByDescending(m => m.Id).Take(3).ToList();
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<main class="container">
+    <section>
+        <h2>Popular Listings</h2>
+        <div class="listing-section">
+            @foreach (var monster in popularMonsters)
+            {
+                <div class="listing-card">
+                    <div class="img-placeholder">img</div>
+                    <div class="listing-info">
+                        <strong>@monster.Name</strong> (@monster.Species)<br />
+                        <span>@monster.Description</span><br />
+                        <span>Fee: $@monster.Price</span><br />
+                        <a asp-controller="Monsters" asp-action="Details" asp-route-id="@monster.Id">See more →</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+
+    <section>
+        <h2>Recent Listings</h2>
+        <div class="listing-section">
+            @foreach (var monster in recentMonsters)
+            {
+                <div class="listing-card">
+                    <div class="img-placeholder">img</div>
+                    <div class="listing-info">
+                        <strong>@monster.Name</strong> (@monster.Species)<br />
+                        <span>@monster.Description</span><br />
+                        <span>Fee: $@monster.Price</span><br />
+                        <a asp-controller="Monsters" asp-action="Details" asp-route-id="@monster.Id">See more →</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+</main>
