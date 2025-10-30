@@ -10,6 +10,9 @@ The monsters that the user will be able to adopt are based in the horror genre w
 
 There will also be various activities for the user to perform with their monster in the near future as the website takes shape.
 
+<img width="1950" height="911" alt="image" src="https://github.com/user-attachments/assets/0ca9214c-cbb8-46be-af91-4fd26504ff04" />
+Image above lists the general goal and design of the home page, discussion here https://github.com/logprogrammer92/AdoptAMonsterSite/discussions/34
+
 ## Definitions
 - "Adopt" means that the user takes care of a monster. That means that they can feed it, take it for a walk, or use it to scare other monsters.
 - TODO: discuss why we have listed the definition for adopting a monster, please refer to [this](https://github.com/logprogrammer92/AdoptAMonsterSite/discussions/26) discussion post
