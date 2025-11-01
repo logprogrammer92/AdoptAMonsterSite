@@ -23,7 +23,7 @@ public class Monster
     public decimal? Price { get; set; }
 
     [ForeignKey("ApplicationUser")]
-    public string ApplicationUserID { get; set; } = string.Empty;
+    public string? ApplicationUserID { get; set; } = null;
     public ApplicationUser ApplicationUser { get; set; } = null;
 }
 
