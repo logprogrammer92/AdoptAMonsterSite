@@ -1,19 +1,14 @@
-﻿@model IEnumerable<AdoptAMonsterSite.Models.Monster>
+﻿@model AdoptAMonsterSite.Models.ViewModels.HomeIndexViewModel
 
 @{
     ViewData["Title"] = "Home Page";
-
-    // Preprocess popular and recent monsters to avoid dynamic LINQ issues
-    var monsterList = Model ?? new List<AdoptAMonsterSite.Models.Monster>();
-    var popularMonsters = monsterList.Take(3).ToList();
-    var recentMonsters = monsterList.OrderByDescending(m => m.Id).Take(3).ToList();
 }
 
 <main class="container">
     <section>
         <h2>Popular Listings</h2>
         <div class="listing-section">
-            @foreach (var monster in popularMonsters)
+            @foreach (var monster in Model.PopularMonsters)
             {
                 <div class="listing-card">
                     <div class="img-placeholder">img</div>
@@ -31,7 +26,7 @@
     <section>
         <h2>Recent Listings</h2>
         <div class="listing-section">
-            @foreach (var monster in recentMonsters)
+            @foreach (var monster in Model.RecentMonster)
             {
                 <div class="listing-card">
                     <div class="img-placeholder">img</div>

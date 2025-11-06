@@ -1,6 +1,8 @@
 using AdoptAMonsterSite.Data;
 using AdoptAMonsterSite.Models;
+using AdoptAMonsterSite.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Diagnostics;
 
 namespace AdoptAMonsterSite.Controllers;
@@ -19,8 +21,23 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        var monsters = _context.Monsters.ToList(); // or use mock data if empty
-        return View(monsters);
+        var popular = _context.Monsters
+            .OrderByDescending(m => m.Id) //TODO: Implement popularity logic
+            .Take(3)
+            .ToList();
+
+        var recent = _context.Monsters
+            .OrderByDescending(m => m.Id) //TODO: Implement recent logic
+            .Take(3)
+            .ToList();
+
+        var model = new HomeIndexViewModel
+        {
+            PopularMonsters = popular,
+            RecentMonster = recent
+        };
+
+        return View(model);
     }
 
     public IActionResult Privacy()
