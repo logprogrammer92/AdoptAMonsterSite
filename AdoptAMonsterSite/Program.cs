@@ -21,8 +21,7 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<ApplicationDbContext>();
-    context.Database.Migrate(); // Optional: applies any pending migrations
-    DbInitializer.Seed(context); // Your custom seeding method
+    DbInitializer.Seed(context);
 }
 
 
