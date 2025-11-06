@@ -33,7 +33,7 @@ namespace AdoptAMonsterSite.Data.Migrations
                     Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Species = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: true)
+                    AdoptionFee = table.Column<decimal>(type: "decimal(18,2)", nullable: true)
                 },
                 constraints: table =>
                 {

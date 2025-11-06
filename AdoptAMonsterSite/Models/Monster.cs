@@ -3,36 +3,88 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdoptAMonsterSite.Models;
 
+/// <summary>
+/// Represents a monster available for adoption.
+/// </summary>
 public class Monster
 {
-    [Key]
-    public int Id { get; set; }
-    
-    [Required]
-    [Display (Name = "Monster Name")]
-    public required string Name { get; set; }
+ /// <summary>
+ /// Primary key for the monster.
+ /// </summary>
+ [Key]
+ public int Id { get; set; }
+ 
+ /// <summary>
+ /// The display name of the monster.
+ /// </summary>
+ [Required]
+ [StringLength(100, ErrorMessage = "Name cannot be longer than100 characters.")]
+ [Display(Name = "Monster Name")]
+ public required string Name { get; set; }
 
-    [Display (Name = "Species")]
-    public string? Species { get; set; }
+ /// <summary>
+ /// The species of the monster.
+ /// </summary>
+ [StringLength(100, ErrorMessage = "Species cannot be longer than100 characters.")]
+ [Display(Name = "Species")]
+ public string? Species { get; set; }
 
-    [Display(Name = "Description")]
-    public string? Description { get; set; }
+ /// <summary>
+ /// A short description of the monster.
+ /// </summary>
+ [StringLength(1000, ErrorMessage = "Description cannot be longer than1000 characters.")]
+ [Display(Name = "Description")]
+ public string? Description { get; set; }
 
-    [Display(Name = "AdoptionFee")]
+    /// <summary>
+    /// The adoption fee for the monster.
+    /// </summary>
+    [Display(Name = "Adoption Fee")]
     [DataType(DataType.Currency)]
-    public decimal? Price { get; set; }
+    [Range(0, 1000000, ErrorMessage = "Adoption fee must be a non-negative value and reasonably bounded.")]
+    public decimal? AdoptionFee { get; set; }
 
+    /// <summary>
+    /// FK to the application user who listed the monster for adoption.
+    /// </summary>
     [ForeignKey("ApplicationUser")]
-    public string? ApplicationUserID { get; set; } = null;
-    public ApplicationUser ApplicationUser { get; set; } = null;
+ public string? ApplicationUserID { get; set; } = null;
+
+ /// <summary>
+ /// The application user who listed the monster. Nullable to match the foreign key.
+ /// </summary>
+ public ApplicationUser? ApplicationUser { get; set; } = null;
 }
 
 public class MonsterListViewModel
 {
-    public required IEnumerable<Monster> Monsters { get; set; }
-    public int CurrentPage { get; set; }
-    public int TotalPages { get; set; }
-    public int PageSize { get; set; }
-    public int TotalItems { get; set; }
-    public string? SearchTerm { get; set; }
+ /// <summary>
+ /// The list of monsters for the current page.
+ /// </summary>
+ public required IEnumerable<Monster> Monsters { get; set; }
+
+ /// <summary>
+ /// The current page index (1-based).
+ /// </summary>
+ public int CurrentPage { get; set; }
+
+ /// <summary>
+ /// The total number of pages available.
+ /// </summary>
+ public int TotalPages { get; set; }
+
+ /// <summary>
+ /// The page size used for pagination.
+ /// </summary>
+ public int PageSize { get; set; }
+
+ /// <summary>
+ /// The total number of items matching the query.
+ /// </summary>
+ public int TotalItems { get; set; }
+
+ /// <summary>
+ /// The current search term, if any.
+ /// </summary>
+ public string? SearchTerm { get; set; }
 }
