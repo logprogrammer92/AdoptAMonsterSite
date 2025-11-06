@@ -19,7 +19,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        var monsters = _context.Monsters.ToList(); // or use mock data if empty
+        var monsters = _context.Monsters.ToList(); // sends all monsters to the view
         return View(monsters);
     }
 
