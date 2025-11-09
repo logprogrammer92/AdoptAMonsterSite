@@ -115,7 +115,7 @@ namespace AdoptAMonsterSite.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Species,Description,AdoptionFee")] Monster monster)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Species,Description,AdoptionFee,ImageFileName")] Monster monster, IFormFile? ImageFile)
         {
             if (id != monster.Id)
             {
@@ -124,6 +124,30 @@ namespace AdoptAMonsterSite.Controllers
 
             if (ModelState.IsValid)
             {
+
+                if (ImageFile != null && ImageFile.Length > 0)
+                {
+                    // Ensure images folder exists under wwwroot
+                    var imagesFolder = Path.Combine(_env.WebRootPath ?? "wwwroot", "images");
+                    Directory.CreateDirectory(imagesFolder);
+
+                    // Build a safe file name that includes a GUID
+                    var ext = Path.GetExtension(ImageFile.FileName);
+                    var baseName = Path.GetFileNameWithoutExtension(ImageFile.FileName);
+                    var guidName = $"{baseName}_{Guid.NewGuid():N}{ext}";
+
+                    var filePath = Path.Combine(imagesFolder, guidName);
+
+                    // Save the file
+                    await using (var stream = System.IO.File.Create(filePath))
+                    {
+                        await ImageFile.CopyToAsync(stream);
+                    }
+
+                    // Store the generated file name on the model
+                    monster.ImageFileName = guidName;
+                }
+
                 try
                 {
                     _context.Update(monster);
