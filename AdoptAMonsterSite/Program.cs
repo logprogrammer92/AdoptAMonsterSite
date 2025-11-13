@@ -1,5 +1,6 @@
 using AdoptAMonsterSite.Data;
 using AdoptAMonsterSite.Models;
+using AdoptAMonsterSite.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,8 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IMonsterQueryService, MonsterQueryService>();
 
 var app = builder.Build();
 

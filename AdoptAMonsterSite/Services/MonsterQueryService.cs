@@ -1,6 +1,6 @@
 ﻿namespace AdoptAMonsterSite.Services;
 
-public class MonsterQueryService
+public class MonsterQueryService : IMonsterQueryService
 {
     private readonly Data.ApplicationDbContext _context;
     public MonsterQueryService(Data.ApplicationDbContext context)

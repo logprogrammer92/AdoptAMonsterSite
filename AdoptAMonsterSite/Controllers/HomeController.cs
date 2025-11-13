@@ -1,6 +1,7 @@
 using AdoptAMonsterSite.Data;
 using AdoptAMonsterSite.Models;
 using AdoptAMonsterSite.Models.ViewModels;
+using AdoptAMonsterSite.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Diagnostics;
@@ -11,12 +12,16 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly ApplicationDbContext _context;
+    private readonly IMonsterQueryService _monsterQuery;
 
-
-    public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
+    public HomeController(
+        ILogger<HomeController> logger, 
+        ApplicationDbContext context,
+        IMonsterQueryService monsterQuery)
     {
         _logger = logger;
         _context = context;
+        _monsterQuery = monsterQuery;
     }
 
     public IActionResult Index()
