@@ -26,20 +26,11 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        var popular = _context.Monsters
-            .OrderByDescending(m => m.Id) //TODO: Implement popularity logic
-            .Take(3)
-            .ToList();
-
-        var recent = _context.Monsters
-            .OrderByDescending(m => m.Id) //TODO: Implement recent logic
-            .Take(3)
-            .ToList();
 
         var model = new HomeIndexViewModel
         {
-            PopularMonsters = popular,
-            RecentMonster = recent
+            PopularMonsters = _monsterQuery.GetPopularMonsters(3),
+            RecentMonsters = _monsterQuery.GetRecentMonsters(3)
         };
 
         return View(model);
