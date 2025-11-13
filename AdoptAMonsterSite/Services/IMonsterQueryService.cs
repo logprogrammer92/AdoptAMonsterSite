@@ -1,5 +1,6 @@
 ﻿namespace AdoptAMonsterSite.Services;
 
-public class IMonsterQueryService
+public interface IMonsterQueryService
 {
+
 }
