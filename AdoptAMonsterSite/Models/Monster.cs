@@ -61,6 +61,12 @@ public class Monster
  [Required]
  [DataType(DataType.DateTime)]
  public DateTime DateAdded { get; set; } = DateTime.UtcNow;
+
+ /// <summary>
+ /// A numeric score representing the monster's popularity.
+ /// </summary> 
+ [Range(0, int.MaxValue, ErrorMessage = "Popularity must be a non-negative integer.")]]
+ public int PopularityScore { get; set; } = 0;
 }
 
 public class MonsterListViewModel
