@@ -65,7 +65,7 @@ public class Monster
  /// <summary>
  /// A numeric score representing the monster's popularity.
  /// </summary> 
- [Range(0, int.MaxValue, ErrorMessage = "Popularity must be a non-negative integer.")]]
+ [Range(0, int.MaxValue, ErrorMessage = "Popularity must be a non-negative integer.")]
  public int PopularityScore { get; set; } = 0;
 }
 
