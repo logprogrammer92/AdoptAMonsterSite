@@ -8,33 +8,33 @@ namespace AdoptAMonsterSite.Models;
 /// </summary>
 public class Monster
 {
- /// <summary>
- /// Primary key for the monster.
- /// </summary>
- [Key]
- public int Id { get; set; }
+    /// <summary>
+    /// Primary key for the monster.
+    /// </summary>
+    [Key]
+    public int Id { get; set; }
  
- /// <summary>
- /// The display name of the monster.
- /// </summary>
- [Required]
- [StringLength(100, ErrorMessage = "Name cannot be longer than100 characters.")]
- [Display(Name = "Monster Name")]
- public required string Name { get; set; }
+    /// <summary>
+    /// The display name of the monster.
+    /// </summary>
+    [Required]
+    [StringLength(100, ErrorMessage = "Name cannot be longer than100 characters.")]
+    [Display(Name = "Monster Name")]
+    public required string Name { get; set; }
 
- /// <summary>
- /// The species of the monster.
- /// </summary>
- [StringLength(100, ErrorMessage = "Species cannot be longer than100 characters.")]
- [Display(Name = "Species")]
- public string? Species { get; set; }
+    /// <summary>
+    /// The species of the monster.
+    /// </summary>
+    [StringLength(100, ErrorMessage = "Species cannot be longer than100 characters.")]
+    [Display(Name = "Species")]
+    public string? Species { get; set; }
 
- /// <summary>
- /// A short description of the monster.
- /// </summary>
- [StringLength(1000, ErrorMessage = "Description cannot be longer than1000 characters.")]
- [Display(Name = "Description")]
- public string? Description { get; set; }
+    /// <summary>
+    /// A short description of the monster.
+    /// </summary>
+    [StringLength(1000, ErrorMessage = "Description cannot be longer than1000 characters.")]
+    [Display(Name = "Description")]
+    public string? Description { get; set; }
 
     /// <summary>
     /// The adoption fee for the monster.
@@ -48,7 +48,7 @@ public class Monster
     /// FK to the application user who listed the monster for adoption.
     /// </summary>
     [ForeignKey("ApplicationUser")]
- public string? ApplicationUserID { get; set; } = null;
+    public string? ApplicationUserID { get; set; } = null;
 
  /// <summary>
  /// The application user who listed the monster. Nullable to match the foreign key.
@@ -67,6 +67,15 @@ public class Monster
  /// </summary> 
  [Range(0, int.MaxValue, ErrorMessage = "Popularity must be a non-negative integer.")]
  public int PopularityScore { get; set; } = 0;
+    /// <summary>
+    /// The application user who listed the monster. Nullable to match the foreign key.
+    /// </summary>
+    public ApplicationUser? ApplicationUser { get; set; } = null;
+
+    /// <summary>
+    /// Gets or sets the file name of the image associated with this Monster.
+    /// </summary>
+    public string? ImageFileName { get; set; } = null;
 }
 
 public class MonsterListViewModel

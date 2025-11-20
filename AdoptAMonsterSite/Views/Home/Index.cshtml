@@ -11,7 +11,16 @@
             @foreach (var monster in Model.PopularMonsters)
             {
                 <div class="listing-card">
-                    <div class="img-placeholder">img</div>
+                    @if (!string.IsNullOrEmpty(monster.ImageFileName))
+                    {
+                        <div class="img-container">
+                            <img src="@Url.Content($"~/images/{monster.ImageFileName}")" alt="@monster.Name" class="listing-img" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="img-placeholder">No image</div>
+                    }
                     <div class="listing-info">
                         <strong>@monster.Name</strong> (@monster.Species)<br />
                         <span>@monster.Description</span><br />
@@ -29,7 +38,16 @@
             @foreach (var monster in Model.RecentMonsters)
             {
                 <div class="listing-card">
-                    <div class="img-placeholder">img</div>
+                    @if (!string.IsNullOrEmpty(monster.ImageFileName))
+                    {
+                        <div class="img-container">
+                            <img src="@Url.Content($"~/images/{monster.ImageFileName}")" alt="@monster.Name" class="listing-img" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="img-placeholder">No image</div>
+                    }
                     <div class="listing-info">
                         <strong>@monster.Name</strong> (@monster.Species)<br />
                         <span>@monster.Description</span><br />
