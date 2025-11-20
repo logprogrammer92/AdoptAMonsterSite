@@ -62,6 +62,7 @@ namespace AdoptAMonsterSite.Controllers
         {
             if (ModelState.IsValid)
             {
+                monster.DateAdded = DateTime.UtcNow;
                 _context.Add(monster);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
