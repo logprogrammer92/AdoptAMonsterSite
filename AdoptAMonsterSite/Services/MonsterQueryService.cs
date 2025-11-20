@@ -10,14 +10,14 @@ public class MonsterQueryService : IMonsterQueryService
     public List<Models.Monster> GetPopularMonsters(int count)
     {
         return _context.Monsters
-            .OrderByDescending(m => m.Id) //TODO: Implement popularity logic
+            .OrderByDescending(m => m.PopularityScore)
             .Take(count)
             .ToList();
     }
     public List<Models.Monster> GetRecentMonsters(int count)
     {
         return _context.Monsters
-            .OrderByDescending(m => m.Id) //TODO: Implement recent logic
+            .OrderByDescending(m => m.DateAdded)
             .Take(count)
             .ToList();
     }
