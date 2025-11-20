@@ -67,10 +67,6 @@ public class Monster
  /// </summary> 
  [Range(0, int.MaxValue, ErrorMessage = "Popularity must be a non-negative integer.")]
  public int PopularityScore { get; set; } = 0;
-    /// <summary>
-    /// The application user who listed the monster. Nullable to match the foreign key.
-    /// </summary>
-    public ApplicationUser? ApplicationUser { get; set; } = null;
 
     /// <summary>
     /// Gets or sets the file name of the image associated with this Monster.
