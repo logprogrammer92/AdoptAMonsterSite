@@ -45,6 +45,10 @@ namespace AdoptAMonsterSite.Controllers
                 return NotFound();
             }
 
+            //Increment popularity score
+            monster.PopularityScore += 1;
+            await _context.SaveChangesAsync();
+
             return View(monster);
         }
 
@@ -63,6 +67,7 @@ namespace AdoptAMonsterSite.Controllers
         {
             if (ModelState.IsValid)
             {
+                monster.DateAdded = DateTime.UtcNow;
 
                 if (ImageFile != null && ImageFile.Length > 0)
                 {

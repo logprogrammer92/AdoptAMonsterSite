@@ -50,10 +50,23 @@ public class Monster
     [ForeignKey("ApplicationUser")]
     public string? ApplicationUserID { get; set; } = null;
 
-    /// <summary>
-    /// The application user who listed the monster. Nullable to match the foreign key.
-    /// </summary>
-    public ApplicationUser? ApplicationUser { get; set; } = null;
+ /// <summary>
+ /// The application user who listed the monster. Nullable to match the foreign key.
+ /// </summary>
+ public ApplicationUser? ApplicationUser { get; set; } = null;
+
+ /// <summary>
+ /// A date for when the monster was added into the system.
+ /// </summary>
+ [Required]
+ [DataType(DataType.DateTime)]
+ public DateTime DateAdded { get; set; } = DateTime.UtcNow;
+
+ /// <summary>
+ /// A numeric score representing the monster's popularity.
+ /// </summary> 
+ [Range(0, int.MaxValue, ErrorMessage = "Popularity must be a non-negative integer.")]
+ public int PopularityScore { get; set; } = 0;
 
     /// <summary>
     /// Gets or sets the file name of the image associated with this Monster.
