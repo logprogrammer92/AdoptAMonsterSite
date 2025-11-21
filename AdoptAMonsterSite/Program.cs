@@ -17,6 +17,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IMonsterQueryService, MonsterQueryService>();
+builder.Services.AddScoped<ImageResizerService>();
 
 var app = builder.Build();
 

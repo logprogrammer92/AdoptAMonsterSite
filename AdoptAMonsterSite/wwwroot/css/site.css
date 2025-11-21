@@ -68,6 +68,16 @@ footer {
     min-width: 250px;
 }
 
+/* Image container styling */
+.img-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 150px;
+    margin-bottom: 10px;
+}
+
 .img-placeholder {
     width: 100%;
     height: 150px;
@@ -92,4 +102,13 @@ footer {
     text-decoration: none;
     color: #258cfb;
     font-weight: bold;
+}
+
+/* New: ensure listing images are 200px wide with preserved aspect ratio and centered */
+.listing-img, .monster-image {
+    width: 200px;    /* force width to 200px */
+    height: auto;    /* preserve aspect ratio */
+    object-fit: contain; /* ensure the image scales inside its box */
+    display: block;
+    margin: 0 auto 10px; /* center horizontally with auto margins */
 }
