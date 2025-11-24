@@ -47,15 +47,16 @@
     @if (User.Identity?.IsAuthenticated ?? false)
     {
         // If nobody has adopted the monster, show Adopt link
-        if (Model.ApplicationUser == null)
+        if (Model.ApplicationUserID == null)
         {
             <text> | <a asp-action="Adopt" asp-route-id="@Model?.Id" onclick="return confirm('Are you sure you want to adopt this monster?');">Adopt Monster</a></text>
         }
         else
         {
-            // Safe access to UserName because ApplicationUser is not null here
-            var ownerName = Model.ApplicationUser?.UserName;
-            if (!string.Equals(ownerName, User.Identity?.Name, StringComparison.OrdinalIgnoreCase))
+            // Safe access to owner and current user's id
+            var ownerId = Model.ApplicationUserID;
+            var currentUserId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            if (!string.Equals(ownerId, currentUserId, StringComparison.OrdinalIgnoreCase))
             {
                 <text> | <span>This monster is already adopted.</span></text>
             }
