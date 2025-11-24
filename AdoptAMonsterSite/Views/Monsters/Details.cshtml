@@ -37,6 +37,32 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+     @if (User.Identity?.IsAuthenticated ?? false)
+    {
+        <text><a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> | </text>
+    }
+    
     <a asp-action="Index">Back to List</a>
+
+    @if (User.Identity?.IsAuthenticated ?? false)
+    {
+        // If nobody has adopted the monster, show Adopt link
+        if (Model.ApplicationUser == null)
+        {
+            <text> | <a asp-action="Adopt" asp-route-id="@Model?.Id" onclick="return confirm('Are you sure you want to adopt this monster?');">Adopt Monster</a></text>
+        }
+        else
+        {
+            // Safe access to UserName because ApplicationUser is not null here
+            var ownerName = Model.ApplicationUser?.UserName;
+            if (!string.Equals(ownerName, User.Identity?.Name, StringComparison.OrdinalIgnoreCase))
+            {
+                <text> | <span>This monster is already adopted.</span></text>
+            }
+            else
+            {
+                <text> | <a asp-action="Abandon" asp-route-id="@Model?.Id" onclick="return confirm('Are you sure you want to abandon this monster? This action cannot be undone but you can always re-adopt this monster if no one has adopted it yet.');">Abandon Monster</a></text>
+            }
+        }
+    }
 </div>
