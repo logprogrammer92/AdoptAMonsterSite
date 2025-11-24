@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.IO;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using AdoptAMonsterSite.Data;
 using AdoptAMonsterSite.Models;
 
@@ -97,6 +99,94 @@ namespace AdoptAMonsterSite.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(monster);
+        }
+
+        // GET: Monsters/Abandon/5
+        public async Task<IActionResult> Abandon(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var monster = await _context.Monsters.FindAsync(id);
+            if (monster == null)
+            {
+                return NotFound();
+            }
+
+            monster.ApplicationUserID = null;
+            monster.ApplicationUser = null;
+
+            try
+            {
+                _context.Update(monster);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!MonsterExists(monster.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        // GET: Monsters/Adopt/5
+        [Authorize]
+        public async Task<IActionResult> Adopt(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var monster = await _context.Monsters.FindAsync(id);
+            if (monster == null)
+            {
+                return NotFound();
+            }
+
+            // If already adopted, do nothing (could also show a message)
+            if (!string.IsNullOrEmpty(monster.ApplicationUserID))
+            {
+                return RedirectToAction(nameof(Details), new { id = monster.Id });
+            }
+
+            // Get current user's id
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId))
+            {
+                return Challenge();
+            }
+
+            monster.ApplicationUserID = userId;
+            // populate navigation property for consistency (optional)
+            monster.ApplicationUser = await _context.Users.FindAsync(userId);
+
+            try
+            {
+                _context.Update(monster);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!MonsterExists(monster.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return RedirectToAction(nameof(Details), new { id = monster.Id });
         }
 
         // GET: Monsters/Edit/5
