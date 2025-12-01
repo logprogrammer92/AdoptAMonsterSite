@@ -39,7 +39,9 @@ public class ImageResizerService
         );
 
         // Create the resized bitmap with proper alpha support
-        using var resizedBitmap = inputBitmap.Resize(imageInfo, SKFilterQuality.High);
+        // Use SKSamplingOptions instead of the obsolete SKFilterQuality overload
+        var sampling = new SKSamplingOptions(SKFilterMode.Linear, SKMipmapMode.None);
+        using var resizedBitmap = inputBitmap.Resize(imageInfo, sampling);
         
         if (resizedBitmap == null)
         {
