@@ -6,11 +6,14 @@
 
 <h1>Monster Listing</h1>
 
-<p>
-    <a asp-action="Create" asp-controller="Monsters" class="btn btn-secondary">
-        Create Monster
-    </a>
-</p>
+@if (User?.IsInRole("Admin") ?? false)
+{
+    <p>
+        <a asp-action="Create" asp-controller="Monsters" class="btn btn-secondary">
+            Create Monster
+        </a>
+    </p>
+}
 <table class="table">
     <thead>
         <tr>
