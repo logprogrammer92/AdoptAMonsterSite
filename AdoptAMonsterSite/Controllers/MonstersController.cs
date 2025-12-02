@@ -300,6 +300,7 @@ namespace AdoptAMonsterSite.Controllers
         }
 
         // GET: Monsters/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -319,6 +320,7 @@ namespace AdoptAMonsterSite.Controllers
 
         // POST: Monsters/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
