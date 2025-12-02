@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 using AdoptAMonsterSite.Data;
 using AdoptAMonsterSite.Models;
+using AdoptAMonsterSite.Services;
 
 namespace AdoptAMonsterSite.Controllers
 {
@@ -19,11 +20,13 @@ namespace AdoptAMonsterSite.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _env;
+        private readonly ImageResizerService _imageResizer;
 
-        public MonstersController(ApplicationDbContext context, IWebHostEnvironment env)
+        public MonstersController(ApplicationDbContext context, IWebHostEnvironment env, ImageResizerService imageResizer)
         {
             _context = context;
             _env = env;
+            _imageResizer = imageResizer;
         }
 
         // GET: Monsters
@@ -84,10 +87,11 @@ namespace AdoptAMonsterSite.Controllers
 
                     var filePath = Path.Combine(imagesFolder, guidName);
 
-                    // Save the file
-                    await using (var stream = System.IO.File.Create(filePath))
+                    // Resize the image to 200px width while maintaining aspect ratio
+                    using (var inputStream = ImageFile.OpenReadStream())
+                    using (var outputStream = System.IO.File.Create(filePath))
                     {
-                        await ImageFile.CopyToAsync(stream);
+                        _imageResizer.ResizeImage(inputStream, outputStream, targetWidth: 200, quality: 85);
                     }
 
                     // Store the generated file name on the model
@@ -256,10 +260,11 @@ namespace AdoptAMonsterSite.Controllers
 
                     var filePath = Path.Combine(imagesFolder, guidName);
 
-                    // Save the new file
-                    await using (var stream = System.IO.File.Create(filePath))
+                    // Resize the image to 200px width while maintaining aspect ratio
+                    using (var inputStream = ImageFile.OpenReadStream())
+                    using (var outputStream = System.IO.File.Create(filePath))
                     {
-                        await ImageFile.CopyToAsync(stream);
+                        _imageResizer.ResizeImage(inputStream, outputStream, targetWidth: 200, quality: 85);
                     }
 
                     // Assign the new generated file name to the existing entity

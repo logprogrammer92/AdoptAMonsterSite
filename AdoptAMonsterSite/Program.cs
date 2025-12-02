@@ -24,6 +24,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IMonsterQueryService, MonsterQueryService>();
+builder.Services.AddScoped<ImageResizerService>();
 
 var app = builder.Build();
 
