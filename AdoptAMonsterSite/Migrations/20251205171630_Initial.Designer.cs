@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace AdoptAMonsterSite.Data.Migrations
+namespace AdoptAMonsterSite.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251021013718_InitialIdentitySetup")]
-    partial class InitialIdentitySetup
+    [Migration("20251205171630_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,9 +31,6 @@ namespace AdoptAMonsterSite.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AdoptedMonsterID")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -105,20 +102,37 @@ namespace AdoptAMonsterSite.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<decimal?>("AdoptionFee")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ApplicationUserID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<string>("ImageFileName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
-                    b.Property<decimal?>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("PopularityScore")
+                        .HasColumnType("int");
 
                     b.Property<string>("Species")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserID");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -261,6 +275,15 @@ namespace AdoptAMonsterSite.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("AdoptAMonsterSite.Models.Monster", b =>
+                {
+                    b.HasOne("AdoptAMonsterSite.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserID");
+
+                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
