@@ -3,6 +3,7 @@ using AdoptAMonsterSite.Models;
 using AdoptAMonsterSite.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,8 +47,14 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-//app.MapStaticAssets();
-app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images")),
+    RequestPath = "/images"
+});
+
+app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
