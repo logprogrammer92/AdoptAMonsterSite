@@ -1,7 +1,10 @@
-﻿namespace AdoptAMonsterSite.Models.ViewModels;
+﻿using System.Collections.Generic;
+
+namespace AdoptAMonsterSite.Models.ViewModels;
 
 public class HomeIndexViewModel
 {
-    public List<Monster> PopularMonsters { get; set; }
-    public List<Monster> RecentMonsters { get; set; }
+    // Initialize lists to avoid non-nullable property warnings
+    public List<Monster> PopularMonsters { get; set; } = new();
+    public List<Monster> RecentMonsters { get; set; } = new();
 }
