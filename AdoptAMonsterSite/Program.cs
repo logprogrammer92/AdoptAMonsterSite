@@ -3,6 +3,7 @@ using AdoptAMonsterSite.Models;
 using AdoptAMonsterSite.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,16 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IMonsterQueryService, MonsterQueryService>();
 builder.Services.AddScoped<ImageResizerService>();
+
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("en-US");
+    // Add culture language support here
+    options.SupportedCultures = new List<CultureInfo>
+    {
+        new CultureInfo("en-US")
+    };
+});
 
 var app = builder.Build();
 
