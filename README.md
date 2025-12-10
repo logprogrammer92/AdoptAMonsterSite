@@ -1,25 +1,18 @@
-# AdoptAMonsterSite
+# AdoptAMonsterSite [(Try the online site here)](https://adoptamonster-alex-f2awgzayfcaxd7d8.canadacentral-01.azurewebsites.net/)
 
-This website allows visitors to create user accounts, view monster listings, 
-and with permissions granted by having a user account they can adopt their own monster. 
-Depending on access level certain users will also be able to make listings 
-and take down their own listings with an even higher tier of access to edit 
-and delete other monster listings not made by the set user.
+This website allows visitors to create user accounts, create monsters, view monster listings, 
+and adopt their own monster or two. 
 
-The monsters that the user will be able to adopt are based in the horror genre wether it be through books, movies, or games, just as a way to further connect with certain pop culture monsters.
+The monsters that the user will be able to adopt are based in the horror genre whether it be through books, movies, or games, just as a way to further connect with certain pop culture monsters.
 
 There will also be various activities for the user to perform with their monster in the near future as the website takes shape.
 
-<img width="1950" height="911" alt="image" src="https://github.com/user-attachments/assets/0ca9214c-cbb8-46be-af91-4fd26504ff04" />
-Image above lists the general goal and design of the home page, discussion here https://github.com/logprogrammer92/AdoptAMonsterSite/discussions/34
-
-## Definitions
-- "Adopt" means that the user takes care of a monster. That means that they can feed it, take it for a walk, or use it to scare other monsters.
-- TODO: discuss why we have listed the definition for adopting a monster, please refer to [this](https://github.com/logprogrammer92/AdoptAMonsterSite/discussions/26) discussion post
+<img width="1950" height="911" alt="image" src="Monster.png" />
 
 ## Database Information
-- Based on ASP.NET Core Identity for the user data
-- TODO: add more info
+- Using ASP.NET Core Identity for the user data
+- Using SQL Server for the database
+- Using SkiaSharp for the image resizing and saving.
 
 ## Getting started
 - [.NET 9.0](https://dotnet.microsoft.com/en-us/download/dotnet/9.0)

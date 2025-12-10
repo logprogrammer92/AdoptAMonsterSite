@@ -4,19 +4,16 @@ using AdoptAMonsterSite.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace AdoptAMonsterSite.Data.Migrations
+namespace AdoptAMonsterSite.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251108202440_AddingImageFileName")]
-    partial class AddingImageFileName
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -108,6 +105,9 @@ namespace AdoptAMonsterSite.Data.Migrations
                     b.Property<string>("ApplicationUserID")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
@@ -119,6 +119,9 @@ namespace AdoptAMonsterSite.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("PopularityScore")
+                        .HasColumnType("int");
 
                     b.Property<string>("Species")
                         .HasMaxLength(100)
